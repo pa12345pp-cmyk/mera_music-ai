@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mera Music AI</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #10101c;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+.card {
+  max-width: 600px;
+  margin: 35px auto;
+  padding: 25px;
+  background: #202033;
+  border-radius: 18px;
+}
+h1 { color: #c7a5ff; }
+textarea, select, button {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 9px;
+  font-size: 16px;
+}
+textarea { height: 110px; }
+button {
+  background: #8957f5;
+  color: white;
+  border: 0;
+  cursor: pointer;
+}
+#result { color: #c7a5ff; }
+</style>
+</head>
+<body>
+  <h1>🎵 Mera Music AI</h1>
+  <p>अपने विचारों से नया गाना बनाने की शुरुआत करें</p>
+
+  <div class="card">
+    <h2>अपना गाना बनाएँ</h2>
+    <textarea id="idea" placeholder="जैसे: माँ के लिए भावुक हिंदी गीत"></textarea>
+
+    <select id="language">
+      <option>हिंदी</option>
+      <option>English</option>
+      <option>कन्नड़</option>
+      <option>पंजाबी</option>
+    </select>
+
+    <select id="style">
+      <option>रोमांटिक</option>
+      <option>भक्ति</option>
+      <option>पॉप</option>
+      <option>दर्द भरा गीत</option>
+      <option>इंस्ट्रूमेंटल</option>
+    </select>
+
+    <button onclick="makeSong()">🎶 गाना बनाएँ</button>
+    <p id="result">आपका गाना यहाँ दिखाई देगा।</p>
+  </div>
+
+  <script>
+    function makeSong() {
+      const idea = document.getElementById("idea").value.trim();
+      const language = document.getElementById("language").value;
+      const style = document.getElementById("style").value;
+      const result = document.getElementById("result");
+
+      if (!idea) {
+        result.textContent = "पहले अपने गाने का विचार लिखें।";
+        return;
+      }
+
+      result.textContent =
+        "आपका विचार: " + idea +
+        " | भाषा: " + language +
+        " | शैली: " + style +
+        "। यह शुरुआती डेमो है; अभी असली ऑडियो नहीं बनता।";
+    }
+  </script>
+</body>
+</html>
