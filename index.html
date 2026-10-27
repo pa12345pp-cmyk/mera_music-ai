@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mera Music AI</title>
+<style>
+body{margin:0;background:#10101c;color:white;font-family:Arial,sans-serif;text-align:center;padding:25px 15px}
+.card{max-width:600px;margin:35px auto;padding:25px;background:#202035;border-radius:18px}
+h1{color:#a78bfa}
+textarea{box-sizing:border-box;width:100%;height:130px;padding:12px;border-radius:10px;font-size:16px}
+button{background:#7c3aed;color:white;border:0;padding:14px 24px;border-radius:10px;font-size:17px;cursor:pointer;margin-top:15px}
+#result{color:#fbbf24}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🎵 Mera Music AI</h1>
+<p>अपने शब्दों से नया गाना या भजन तैयार करें</p>
+<textarea id="lyrics" placeholder="यहाँ अपने गाने या भजन के बोल लिखें..."></textarea>
+<br>
+<button onclick="makeSong()">गाना बनाएँ</button>
+<p id="result">अपना गाना लिखकर बटन दबाएँ।</p>
+<p>यह शुरुआती वेबसाइट है। वास्तविक ऑडियो बनाने की सुविधा अभी जुड़ी नहीं है।</p>
+</div>
+<script>
+function makeSong(){
+const lyrics=document.getElementById('lyrics').value.trim();
+document.getElementById('result').textContent=lyrics ? 'आपके बोल तैयार हैं। वास्तविक संगीत बनाने की सुविधा अभी जोड़नी बाकी है।' : 'कृपया पहले अपने गाने के बोल लिखें।';
+}
+</script>
+</body>
+</html>
