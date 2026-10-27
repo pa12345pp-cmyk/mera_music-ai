@@ -6,28 +6,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mera Music AI</title>
 <style>
-body{margin:0;background:#10101c;color:white;font-family:Arial,sans-serif;text-align:center;padding:25px 15px}
-.card{max-width:600px;margin:35px auto;padding:25px;background:#202035;border-radius:18px}
-h1{color:#a78bfa}
-textarea{box-sizing:border-box;width:100%;height:130px;padding:12px;border-radius:10px;font-size:16px}
-button{background:#7c3aed;color:white;border:0;padding:14px 24px;border-radius:10px;font-size:17px;cursor:pointer;margin-top:15px}
-#result{color:#fbbf24}
+*{box-sizing:border-box}
+body{margin:0;background:#101426;color:white;font-family:Arial,sans-serif;padding:18px}
+.card{max-width:720px;margin:20px auto;background:#202b45;padding:24px;border-radius:18px}
+h1{text-align:center;color:#9daeff}
+p{text-align:center;color:#d5dbee}
+label{display:block;margin-top:16px;margin-bottom:8px}
+textarea,select,input{width:100%;padding:12px;border-radius:9px;border:1px solid #68799d;background:#111a30;color:white;font-size:16px}
+textarea{height:160px;resize:vertical}
+button{width:100%;padding:14px;margin-top:16px;border:0;border-radius:10px;background:#6b7cff;color:white;font-size:17px;cursor:pointer}
+.note{background:#172039;padding:14px;border-radius:10px;line-height:1.6;margin-top:18px}
+#result{margin-top:18px;color:#ffe08a;line-height:1.6}
 </style>
 </head>
 <body>
 <div class="card">
 <h1>🎵 Mera Music AI</h1>
 <p>अपने शब्दों से नया गाना या भजन तैयार करें</p>
-<textarea id="lyrics" placeholder="यहाँ अपने गाने या भजन के बोल लिखें..."></textarea>
-<br>
-<button onclick="makeSong()">गाना बनाएँ</button>
-<p id="result">अपना गाना लिखकर बटन दबाएँ।</p>
-<p>यह शुरुआती वेबसाइट है। वास्तविक ऑडियो बनाने की सुविधा अभी जुड़ी नहीं है।</p>
+
+<label for="lyrics">अपने गाने या भजन के बोल लिखें</label>
+<textarea id="lyrics" placeholder="यहाँ अपने भजन के बोल लिखें..."></textarea>
+
+<label for="style">म्यूजिक स्टाइल चुनें</label>
+<select id="style">
+<option>हनुमान भजन — जोशीला</option>
+<option>धीमा भक्तिमय भजन</option>
+<option>बॉलीवुड रोमांटिक</option>
+<option>मोटिवेशनल गीत</option>
+<option>शांत ध्यान संगीत</option>
+</select>
+
+<label for="voice">आवाज़ चुनें</label>
+<select id="voice">
+<option>गहरी पुरुष आवाज़</option>
+<option>महिला भक्ति आवाज़</option>
+<option>पुरुष और महिला युगल</option>
+<option>केवल इंस्ट्रूमेंटल संगीत</option>
+</select>
+
+<button onclick="makeSong()">🎶 गाना बनाएँ</button>
+<div id="result" role="status"></div>
+
+<div class="note">
+<strong>अगला लक्ष्य</strong><br>
+यह वेबसाइट का शुरुआती संस्करण है। असली आवाज़ और संगीत बनाने के लिए ऑडियो जनरेशन सेवा जोड़नी होगी। उसके बाद गाना सुनने और MP3 डाउनलोड करने की सुविधा जोड़ी जा सकती है।
 </div>
+</div>
+
 <script>
 function makeSong(){
 const lyrics=document.getElementById('lyrics').value.trim();
-document.getElementById('result').textContent=lyrics ? 'आपके बोल तैयार हैं। वास्तविक संगीत बनाने की सुविधा अभी जोड़नी बाकी है।' : 'कृपया पहले अपने गाने के बोल लिखें।';
+const style=document.getElementById('style').value;
+const voice=document.getElementById('voice').value;
+const result=document.getElementById('result');
+if(!lyrics){
+result.textContent='पहले अपने गाने या भजन के बोल लिखें।';
+return;
+}
+result.textContent='आपके बोल तैयार हैं। चुना गया स्टाइल: '+style+'। आवाज़: '+voice+'। असली ऑडियो बनाने की सेवा अभी जोड़नी बाकी है।';
 }
 </script>
 </body>
