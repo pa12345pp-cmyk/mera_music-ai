@@ -4,6 +4,525 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100d22">
+<meta name="description" content="Mera Music AI - अपने विचारों से हिंदी भजन, भक्ति गीत और नए गीतों के बोल तैयार करें।">
+<title>Mera Music AI | आपका अपना संगीत स्टूडियो</title>
+
+<style>
+:root {
+  --bg: #100d22;
+  --panel: #1b1733;
+  --panel2: #241e40;
+  --text: #fffaf5;
+  --muted: #c0b8d8;
+  --gold: #ffcb70;
+  --pink: #ed8dff;
+  --green: #77e6b1;
+  --border: rgba(255,255,255,.12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at top left, #34205d 0, transparent 45%),
+    radial-gradient(ellipse at top right, #40204a 0, transparent 38%),
+    var(--bg);
+  color: var(--text);
+  font-family: Arial, "Noto Sans Devanagari", sans-serif;
+  line-height: 1.65;
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.wrap { width: min(1080px, 92%); margin: auto; }
+header {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  background: rgba(16,13,34,.78);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.logo { font-size: 21px; font-weight: 800; }
+.logo span { color: var(--gold); }
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 16px;
+  font-size: 14px;
+}
+.hero { text-align: center; padding: 62px 0 35px; }
+.pill {
+  display: inline-block;
+  padding: 6px 13px;
+  border: 1px solid #6d518d;
+  background: rgba(237,141,255,.09);
+  border-radius: 30px;
+  color: #f3c8ff;
+  font-size: 13px;
+}
+h1 {
+  font-size: clamp(34px, 6vw, 58px);
+  line-height: 1.2;
+  margin: 18px 0;
+  letter-spacing: -1px;
+}
+h1 span {
+  color: var(--gold);
+}
+.hero p {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  color: var(--muted);
+}
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  transition: transform .15s, opacity .15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.btn-main {
+  color: #261535;
+  background: linear-gradient(110deg, var(--gold), var(--pink));
+}
+.btn-secondary {
+  color: var(--text);
+  background: #30274c;
+  border: 1px solid var(--border);
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 22px;
+  align-items: start;
+  padding: 22px 0 48px;
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  background: linear-gradient(145deg, rgba(36,30,64,.96), rgba(23,19,43,.97));
+  box-shadow: 0 15px 40px rgba(0,0,0,.16);
+  min-width: 0;
+}
+h2 { font-size: 23px; margin: 0 0 6px; }
+.sub { color: var(--muted); font-size: 14px; margin: 0 0 22px; }
+label {
+  display: block;
+  font-weight: 700;
+  margin: 15px 0 7px;
+  font-size: 14px;
+}
+input, select, textarea {
+  display: block;
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #51466f;
+  border-radius: 11px;
+  background: #131027;
+  color: var(--text);
+}
+textarea { min-height: 105px; resize: vertical; }
+input::placeholder, textarea::placeholder { color: #9389ac; }
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.actions .btn { flex: 1; }
+.notice {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
+.result {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #100d22;
+  border: 1px solid var(--border);
+}
+.result h3 { margin: 0 0 12px; color: var(--gold); }
+#lyricsOutput {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #fff4e9;
+  min-height: 60px;
+}
+.small-title { color: var(--gold); font-size: 14px; font-weight: 700; }
+.feature {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.feature:last-child { border-bottom: 0; }
+.feature-icon {
+  font-size: 22px;
+  background: #34284f;
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.feature strong { display: block; }
+.feature p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+.section { padding: 8px 0 45px; }
+.section-head { margin-bottom: 18px; }
+.audio-item {
+  padding: 17px;
+  margin-top: 13px;
+  border: 1px solid var(--border);
+  background: rgba(19,16,39,.75);
+  border-radius: 14px;
+}
+.audio-item h3 { margin: 0 0 8px; font-size: 16px; }
+audio { width: 100%; max-width: 100%; margin-top: 5px; }
+.status {
+  color: var(--green);
+  font-size: 13px;
+  margin-top: 12px;
+  min-height: 20px;
+}
+footer {
+  text-align: center;
+  padding: 25px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 42px; }
+  .card { padding: 19px; }
+  .nav a { margin-left: 8px; }
+}
+@media (max-width: 430px) {
+  .two { grid-template-columns: 1fr; gap: 0; }
+  .actions .btn { flex-basis: 100%; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="logo">🎵 Mera <span>Music AI</span></div>
+    <nav aria-label="मुख्य नेविगेशन">
+      <a href="#studio">गीत स्टूडियो</a>
+      <a href="#music">मेरे गाने</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <span class="pill">✨ आपका अपना संगीत स्टूडियो</span>
+    <h1>दिल की बात को बनाइए<br><span>गीत के अंदाज़ में</span></h1>
+    <p>अपना विचार लिखिए, भाषा और गीत का प्रकार चुनिए और गीत के बोल तैयार कीजिए। अपने पसंदीदा भक्ति गीतों को भी यहाँ सुनिए।</p>
+    <button class="btn btn-main" onclick="document.getElementById('studio').scrollIntoView({behavior:'smooth'})">
+      🎼 गीत बनाना शुरू करें
+    </button>
+  </section>
+
+  <div class="wrap grid">
+    <section class="card" id="studio">
+      <h2>🎙️ अपना गीत तैयार करें</h2>
+      <p class="sub">अपना विचार बताइए। बोल आपके सामने तैयार होंगे।</p>
+
+      <form id="songForm">
+        <label for="idea">गीत किस विषय पर चाहिए?</label>
+        <textarea id="idea" maxlength="500" placeholder="उदाहरण: हनुमान जी की कृपा, परिवार की खुशियाँ, सफलता और मेहनत..." required></textarea>
+
+        <div class="two">
+          <div>
+            <label for="language">गीत की भाषा</label>
+            <select id="language">
+              <option value="Hindi">हिंदी</option>
+              <option value="Hinglish">हिंदी और अंग्रेज़ी</option>
+            </select>
+          </div>
+          <div>
+            <label for="genre">गीत का प्रकार</label>
+            <select id="genre">
+              <option value="bhajan">भक्ति गीत / भजन</option>
+              <option value="hanuman">हनुमान जी का भजन</option>
+              <option value="motivation">प्रेरणादायक गीत</option>
+              <option value="love">प्रेम गीत</option>
+              <option value="happy">खुशी का गीत</option>
+              <option value="prayer">प्रार्थना</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="two">
+          <div>
+            <label for="voice">आवाज़ की पसंद</label>
+            <select id="voice">
+              <option value="male">पुरुष आवाज़</option>
+              <option value="female">महिला आवाज़</option>
+              <option value="duet">युगल आवाज़</option>
+              <option value="chorus">समूह गायन</option>
+            </select>
+          </div>
+          <div>
+            <label for="mood">संगीत का मूड</label>
+            <select id="mood">
+              <option value="peaceful">शांत और मधुर</option>
+              <option value="energetic">जोश से भरा</option>
+              <option value="emotional">भावुक</option>
+              <option value="festive">उत्सव जैसा</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-main" type="submit">✨ गीत के बोल तैयार करें</button>
+          <button class="btn btn-secondary" type="button" id="clearBtn">साफ़ करें</button>
+        </div>
+        <p class="notice">यह संस्करण आपके विचार के आधार पर गीत का शुरुआती मसौदा बनाता है। यहाँ अभी AI गायन या नई ऑडियो फ़ाइल नहीं बनती।</p>
+      </form>
+
+      <div class="result" aria-live="polite">
+        <h3>📝 आपके गीत के बोल</h3>
+        <div id="lyricsOutput">अपना विचार लिखकर “गीत के बोल तैयार करें” दबाएँ।</div>
+        <div class="actions">
+          <button class="btn btn-secondary" type="button" id="copyBtn">📋 बोल कॉपी करें</button>
+          <button class="btn btn-secondary" type="button" id="downloadBtn">⬇️ TXT डाउनलोड</button>
+        </div>
+        <div class="status" id="status" role="status"></div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h2>🌟 आपके स्टूडियो की खूबियाँ</h2>
+      <p class="sub">गीत बनाने की शुरुआत आसान तरीके से करें।</p>
+
+      <div class="feature">
+        <div class="feature-icon">🪔</div>
+        <div><strong>भक्ति और भजन</strong><p>भक्ति, प्रार्थना और आध्यात्मिक विषयों के लिए बोल तैयार करें।</p></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✍️</div>
+        <div><strong>अपने विचार, अपने बोल</strong><p>विषय लिखें और उसे गीत के रूप में ढालने का शुरुआती मसौदा पाएँ।</p></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎧</div>
+        <div><strong>अपने गाने सुनें</strong><p>नीचे मौजूद ऑडियो प्लेयर से अपनी अपलोड की हुई संगीत फ़ाइलें चलाएँ।</p></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <div><strong>मोबाइल और लैपटॉप</strong><p>स्क्रीन के आकार के अनुसार डिज़ाइन अपने आप बदलता है।</p></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <div><strong>सुरक्षित शुरुआत</strong><p>इस संस्करण में कोई API key या बाहरी सेवा आवश्यक नहीं है।</p></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="wrap section" id="music">
+    <div class="section-head">
+      <span class="small-title">🎶 YOUR MUSIC LIBRARY</span>
+      <h2>मेरे गाने सुनें</h2>
+      <p class="sub">आपकी मौजूदा ऑडियो फ़ाइलों को बरकरार रखा गया है।</p>
+    </div>
+
+    <div class="audio-item">
+      <h3>🙏 हनुमान भजन</h3>
+      <audio controls preload="metadata">
+        <source src="hanuman-bhajan.wav.wav" type="audio/wav">
+        आपका ब्राउज़र ऑडियो चलाने में सक्षम नहीं है।
+      </audio>
+    </div>
+
+    <div class="audio-item">
+      <h3>🎵 मेरा दूसरा गाना</h3>
+      <audio controls preload="metadata">
+        <source src="bai-hat-muziai.mp3" type="audio/mpeg">
+        आपका ब्राउज़र ऑडियो चलाने में सक्षम नहीं है।
+      </audio>
+    </div>
+    <p class="notice">यदि कोई गाना नहीं चलता, तो जाँचें कि उसकी फ़ाइल GitHub में इसी नाम से मौजूद है।</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Mera Music AI · आपके विचार, आपकी रचनात्मकता ❤️
+    <br>यह शुरुआती संस्करण है। असली AI गायन की सुविधा अलग से जोड़नी होगी।
+  </div>
+</footer>
+
+<script>
+const form = document.getElementById("songForm");
+const idea = document.getElementById("idea");
+const output = document.getElementById("lyricsOutput");
+const statusBox = document.getElementById("status");
+
+let currentLyrics = "";
+
+function makeDraft(topic, genre, mood, language) {
+  const isHanuman = genre === "hanuman";
+  const isBhakti = genre === "bhajan" || genre === "prayer" || isHanuman;
+
+  let opening;
+  let verse;
+  let chorus;
+
+  if (isHanuman) {
+    opening = "जय हनुमान, जय बजरंगबली,\nआपकी कृपा से राहें खिलीं।";
+    verse = "संकट में आप सहारा बनें,\nमन में विश्वास के दीप जलें।\nसेवा और साहस का मार्ग दिखाएँ,\nआपके चरणों में शीश झुकाएँ।";
+    chorus = "हे हनुमान, मेरी लाज रखना,\nसच्चाई का हरदम साथ रखना।";
+  } else if (isBhakti) {
+    opening = "मन में भक्ति का दीप जले,\nहर कदम पर नई आशा मिले।";
+    verse = "श्रद्धा से हर सुबह सजाएँ,\nप्रेम के फूल प्रभु को चढ़ाएँ।\nमन की चिंता दूर हो जाए,\nजीवन में विश्वास बढ़ जाए।";
+    chorus = "प्रभु जी, अपनी कृपा बनाए रखना,\nसच्चाई के पथ पर चलाए रखना।";
+  } else if (genre === "motivation") {
+    opening = "चलते रहना, कभी न रुकना,\nअपने सपनों से मुँह न मोड़ना।";
+    verse = "मेहनत से हर राह बनेगी,\nहिम्मत से मंज़िल मिलेगी।\nआज का कदम कल बदल देगा,\nतेरा विश्वास नया सवेरा देगा।";
+    chorus = "मैं आगे बढ़ूँगा, मैं करके दिखाऊँगा,\nहर नई चुनौती से सीखता जाऊँगा।";
+  } else if (genre === "love") {
+    opening = "तेरी हँसी से सुबह सँवरती,\nतेरी बातों से शाम निखरती।";
+    verse = "साथ तुम्हारा प्यारा लगे,\nहर मौसम भी न्यारा लगे।\nछोटी खुशियों में सपने सजें,\nदो दिल मिलकर आगे बढ़ें।";
+    chorus = "तेरे संग हर पल खास लगे,\nतेरा साथ मेरा विश्वास बने।";
+  } else if (genre === "happy") {
+    opening = "आज खुशी का रंग छाया,\nहर चेहरे पर नूर है आया।";
+    verse = "मिलकर हँसें और गीत सुनाएँ,\nछोटी खुशियों के पल मनाएँ।\nनई उमंग और नई तरंग,\nदिल में बजे खुशियों का रंग।";
+    chorus = "नाचो गाओ, खुशियाँ मनाओ,\nप्यार बाँटो, मुस्कुराओ।";
+  } else {
+    opening = "हे प्रभु, मेरी विनती सुनना,\nसही राह पर मुझको रखना।";
+    verse = "मन में करुणा, वाणी में प्यार,\nहर जीवन का हो सत्कार।\nभूलों से मुझको सीख दिलाना,\nअच्छे कर्मों की राह दिखाना।";
+    chorus = "सद्बुद्धि देना, साहस देना,\nसबके मन में प्रेम भर देना।";
+  }
+
+  if (mood === "peaceful") {
+    opening = "धीमी हवा में आशा जागे,\nमन का हर कोना रोशन हो जाए।\n\n" + opening;
+  } else if (mood === "energetic") {
+    opening = "नई उमंग, नया अरमान,\nदिल में जोश और ऊँची उड़ान!\n\n" + opening;
+  } else if (mood === "emotional") {
+    opening = "दिल की आवाज़ आज ये कहती,\nआशा हर मुश्किल में साथ रहती।\n\n" + opening;
+  } else {
+    opening = "आज सजे हैं खुशियों के रंग,\nहर दिल गाए मिलकर संग!\n\n" + opening;
+  }
+
+  const voiceNames = {
+    male: "पुरुष आवाज़",
+    female: "महिला आवाज़",
+    duet: "युगल आवाज़",
+    chorus: "समूह गायन"
+  };
+
+  const title = topic.length > 45 ? topic.slice(0, 45) + "…" : topic;
+  const heading = language === "Hinglish"
+    ? "Mera Music AI — Song Draft"
+    : "मेरा म्यूज़िक AI — गीत का मसौदा";
+
+  return heading + "\nविषय: " + title +
+    "\nआवाज़ की पसंद: " + voiceNames[document.getElementById("voice").value] +
+    "\n\nमुखड़ा:\n" + opening +
+    "\n\nअंतरा:\n" + verse +
+    "\n\nकोरस:\n" + chorus +
+    "\n\nसमापन:\nअपने विचारों को कर्म में बदलें,\nहर दिन नई उम्मीद के साथ चलें।" +
+    "\n\nनोट: ये शुरुआती नमूना बोल हैं। विषय के अनुसार इन्हें संपादित कर सकते हैं।";
+}
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  const topic = idea.value.trim();
+
+  if (!topic) {
+    statusBox.textContent = "पहले अपने गीत का विषय लिखिए।";
+    idea.focus();
+    return;
+  }
+
+  currentLyrics = makeDraft(
+    topic,
+    document.getElementById("genre").value,
+    document.getElementById("mood").value,
+    document.getElementById("language").value
+  );
+  output.textContent = currentLyrics;
+  statusBox.textContent = "आपके गीत का शुरुआती मसौदा तैयार है।";
+});
+
+document.getElementById("copyBtn").addEventListener("click", async function() {
+  if (!currentLyrics) {
+    statusBox.textContent = "पहले गीत के बोल तैयार कीजिए।";
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(currentLyrics);
+    statusBox.textContent = "गीत के बोल कॉपी हो गए।";
+  } catch (error) {
+    const area = document.createElement("textarea");
+    area.value = currentLyrics;
+    document.body.appendChild(area);
+    area.select();
+    const copied = document.execCommand("copy");
+    area.remove();
+    statusBox.textContent = copied
+      ? "गीत के बोल कॉपी हो गए।"
+      : "बोल कॉपी नहीं हुए। उन्हें चुनकर कॉपी करें।";
+  }
+});
+
+document.getElementById("downloadBtn").addEventListener("click", function() {
+  if (!currentLyrics) {
+    statusBox.textContent = "पहले गीत के बोल तैयार कीजिए।";
+    return;
+  }
+  const blob = new Blob(["\uFEFF", currentLyrics], {
+    type: "text/plain;charset=utf-8"
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "mera-music-ai-lyrics.txt";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  statusBox.textContent = "गीत के बोल डाउनलोड करने की फ़ाइल तैयार है।";
+});
+
+document.getElementById("clearBtn").addEventListener("click", function() {
+  idea.value = "";
+  output.textContent = "अपना विचार लिखकर “गीत के बोल तैयार करें” दबाएँ।";
+  currentLyrics = "";
+  statusBox.textContent = "";
+  idea.focus();
+});
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mera Music AI</title>
 <style>
 *{box-sizing:border-box}
