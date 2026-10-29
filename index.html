@@ -586,8 +586,9 @@ button{width:100%;padding:14px;margin-top:16px;border:0;border-radius:10px;backg
 
 <script>
 function makeSong(){
-const lyrics=document.getElementById('lyrics').value.trim();
-const style=document.getElementById('style').value;
+const lyrics=document.getElementById('idea').value.trim();
+const style=document.getElementById('genre').value;
+const mood=document.getElementById('mood').value;
 const voice=document.getElementById('voice').value;
 const result=document.getElementById('result');
 if(!lyrics){
