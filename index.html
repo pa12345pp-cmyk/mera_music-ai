@@ -271,6 +271,8 @@ footer {
             <label for="language">गीत की भाषा</label>
             <select id="language">
               <option value="Hindi">हिंदी</option>
+              <option value="Kannada">ಕನ್ನಡ (Kannada)</option>
+              <option value="Punjabi">ਪੰਜਾਬੀ (Punjabi)</option>
               <option value="Hinglish">हिंदी और अंग्रेज़ी</option>
             </select>
           </div>
@@ -312,7 +314,7 @@ footer {
           <button class="btn btn-main" type="submit">✨ गीत के बोल तैयार करें</button>
           <button class="btn btn-secondary" type="button" id="clearBtn">साफ़ करें</button>
         </div>
-        <p class="notice">यह संस्करण आपके विचार के आधार पर गीत का शुरुआती मसौदा बनाता है। यहाँ अभी AI गायन या नई ऑडियो फ़ाइल नहीं बनती।</p>
+        <p class="notice">यह स्टूडियो अभी गीत के बोल तैयार करता है और नीचे आपके अपलोड किए हुए गाने सुनाता है। असली AI गायन सेवा जोड़ने का अगला चरण बाकी है।</p>
       </form>
 
       <div class="result" aria-live="polite">
@@ -369,6 +371,14 @@ footer {
     </div>
 
     <div class="audio-item">
+      <h3>🙏 जय हनुमान — नया AI भजन</h3>
+      <audio controls preload="metadata">
+        <source src="Jai_Hanuman_New_Bhajan.mp3" type="audio/mpeg">
+        आपका ब्राउज़र ऑडियो चलाने में सक्षम नहीं है।
+      </audio>
+    </div>
+
+    <div class="audio-item">
       <h3>🎵 मेरा दूसरा गाना</h3>
       <audio controls preload="metadata">
         <source src="bai-hat-muziai.mp3" type="audio/mpeg">
@@ -382,7 +392,7 @@ footer {
 <footer>
   <div class="wrap">
     Mera Music AI · आपके विचार, आपकी रचनात्मकता ❤️
-    <br>यह शुरुआती संस्करण है। असली AI गायन की सुविधा अलग से जोड़नी होगी।
+    <br>हिंदी, कन्नड़ और पंजाबी विकल्प उपलब्ध हैं। असली AI गायन सेवा अगला चरण है।
   </div>
 </footer>
 
