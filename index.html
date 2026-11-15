@@ -562,8 +562,8 @@ aceUrlInput.value = currentAceUrl;
 localStorage.setItem("meraMusicAceApiUrl", currentAceUrl);
 
 function getAceBaseUrl() {
-  const value = aceUrlInput.value.trim().replace(/\\/+$/, "");
-  if (!value || !/^https:\\/\\//i.test(value)) throw new Error("पहले पूरा https:// Cloudflare API लिंक डालिए।");
+  const value = aceUrlInput.value.trim().replace(/\/+$/, "");
+  if (!value || !/^https:\/\//i.test(value)) throw new Error("पहले पूरा https:// Cloudflare API लिंक डालिए।");
   localStorage.setItem("meraMusicAceApiUrl", value);
   return value;
 }
